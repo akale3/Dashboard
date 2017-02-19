@@ -13,7 +13,7 @@ public class TomcatRunner {
 
     private static Tomcat server;
     private static Properties properties;
-    private static ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
+    public static ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
 
     public static void main(String[] args) throws Exception {
 
