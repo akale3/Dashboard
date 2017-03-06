@@ -19,9 +19,7 @@ public class CSVHelper {
                     '"',
                     1
             );
-            StringBuffer buffer = new StringBuffer();
-            List<String[]> allRows = reader.readAll();
-            return allRows;
+            return reader.readAll();
         } catch (Exception e) {
             System.out.println("Error in parsing data");
             throw e;
