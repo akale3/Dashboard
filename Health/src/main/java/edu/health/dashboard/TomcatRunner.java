@@ -2,6 +2,7 @@ package edu.health.dashboard;
 
 import org.apache.catalina.startup.Tomcat;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -19,7 +20,7 @@ public class TomcatRunner {
 
         loadProperties("application.properties");
 
-        String war = properties.getProperty("war");
+        String war = new File(".").getAbsolutePath() + properties.getProperty("war");
         String context = properties.getProperty("context");
         server = new Tomcat();
         String webPort = properties.getProperty("port");
