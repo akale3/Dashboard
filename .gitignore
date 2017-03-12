@@ -4,3 +4,5 @@
 /.settings
 /target/
 Health/target/
+Health/.settings/
+Health/bin/
