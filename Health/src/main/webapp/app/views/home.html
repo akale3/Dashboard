@@ -67,22 +67,33 @@
         </div>
     </div>
 </div>
+
+
+<!--Chart Section-->
+<div id="checkboxes" onclick="selectChart()">
+    <label>Select Charts:</label>
+    <input type="checkbox" id="lineChkBox"> Line Chart </input>
+    <input type="checkbox" id="barChkBox"> Bar Chart </input>
+    <input type="checkbox" id="pieChkBox"> Pie Chart </input>
+    <input type="checkbox" id="doughnutChkBox"> Doughnut Chart </input>
+    <input type="checkbox" id="stackedChkBox"> Stacked Chart </input>
+</div>
 <div class="row text-center">
-    <div class="col-md-6 col-sm-6 hero-feature">
+    <div class="col-md-6 col-sm-6 hero-feature" id="lineChartDiv">
         <canvas id="lineChart"></canvas>
     </div>
-    <div class="col-md-6 col-sm-6 hero-feature">
+    <div class="col-md-6 col-sm-6 hero-feature" id="barChartDiv">
         <canvas id="barChart" class="canvas-holder half"></canvas>
     </div>
 </div>
 <div class="row text-center">
-    <div class="col-md-4 col-sm-4 hero-feature">
+    <div class="col-md-4 col-sm-4 hero-feature" id="pieChartDiv">
         <canvas id="pieChart" class="canvas-holder half"></canvas>
     </div>
-    <div class="col-md-4 col-sm-4 hero-feature">
+    <div class="col-md-4 col-sm-4 hero-feature" id="doughnutChartDiv">
         <canvas id="doughnutChart" class="canvas-holder half"></canvas>
     </div>
-    <div class="col-md-4 col-sm-4 hero-feature">
+    <div class="col-md-4 col-sm-4 hero-feature" id="stackedChartDiv">
         <canvas id="stackedChart" class="canvas-holder half"></canvas>
     </div>
 </div>
