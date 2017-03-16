@@ -4,7 +4,7 @@
 
 function getCancerData(){
 	//getCancerTable();
-	var years = ['1994','1995','1996','1997','1998','1999'];
+	var years = [];
 	var gender = ['female', 'male'];
 	getCancerQuery('All', gender, years);
 }
@@ -50,7 +50,6 @@ function getCancerQuery(cancerType, gender, years) {
 	    	 query = query + " AND Year IN " + yearStr;  
 	     }else{
 	    	 years = df.distinct('Year').toArray();
-	    	 alert (years.length);
 	     }
 
 	     console.log(query);
