@@ -175,3 +175,43 @@ function createChart(checkBoxName, chartDivName, viewChart){
         document.getElementById(chartDivName).style.display = 'none';
     }
 }
+
+function readTextFile(file) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                var allText = rawFile.responseText;
+                var text = makeTable(allText);
+                //console.log(text);
+                document.getElementById("tableData").innerHTML = text;
+            }
+        }
+    }
+    rawFile.send(null);
+}
+readTextFile("./DownloadableContent/test.csv");
+
+function makeTable ( csv ) {
+
+    var rows = csv.split('\n'),
+    table = document.createElement('table'),
+    tr = null, td = null,
+    tds = null;
+
+    for ( var i = 0; i < rows.length; i++ ) {
+        tr = document.createElement('tr');
+        tds = rows[i].split(',');
+        for ( var j = 0; j < tds.length; j++ ) {
+           td = document.createElement('td');
+           td.innerHTML = tds[j];
+           tr.appendChild(td);
+        }
+        table.appendChild(tr);
+    }
+    return table.innerHTML;
+}

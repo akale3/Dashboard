@@ -1,10 +1,10 @@
+<!DOCTYPE html>
 <!-- Jumbotron Header -->
 <header class="jumbotron hero-spacer">
     <h1>A Warm Welcome!</h1>
     <p>Welcome to health dashboard. It will help you to view and analyze the health related data of all 52 states of United States using Chart.js.</p>
-    </p>
+    <!-- </p> -->
 </header>
-<hr>
 <!-- Title -->
 <div class="row">
     <div class="col-lg-12">
@@ -13,8 +13,7 @@
 </div>
 <!-- /.row -->
 <!-- Page Features -->
-<div class="row text-center">
-
+<div id="menu" class="row text-center">
     <div class="col-md-6 col-sm-6 hero-feature" style="width:232px; height:300px;">
         <div class="thumbnail">
             <img src="./img/mortality.jpg" alt="">
@@ -22,7 +21,7 @@
                 <h3>Mortality</h3>
                 <p>Visualize mortality rate in United States.</p>
                 <p>
-                    <a onclick="getMortalityData()" class="btn btn-default">More Info</a>
+                    <a onclick="dashboard.createTable('mortality')" class="btn btn-default">More Info</a>
                 </p>
             </div>
         </div>
@@ -35,7 +34,7 @@
                 <h3>Birth Rate</h3>
                 <p>Visualize Birth rate in United States.</p>
                 <p>
-                    <a href="#" class="btn btn-default">More Info</a>
+                    <a onclick="dashboard.createTable('birth rate')" class="btn btn-default">More Info</a>
                 </p>
             </div>
         </div>
@@ -43,12 +42,12 @@
 
     <div class="col-md-6 col-sm-6 hero-feature" style="width:232px; height:300px;">
         <div class="thumbnail">
-            <img src="./img/accident.jpg" alt="" >
+            <img src="./img/Smoker.jpg" alt="" >
             <div class="caption">
-                <h3>Accident Death</h3>
-                <p>Visualize death rate in United States by accidents.</p>
+                <h3>Smoker</h3>
+                <p>Visualize Smoker's % in United States.</p>
                 <p>
-                    <a href="#" class="btn btn-default">More Info</a>
+                    <a onclick="dashboard.createTable('smoker')" class="btn btn-default">More Info</a>
                 </p>
             </div>
         </div>
@@ -61,7 +60,7 @@
                 <h3>Cancer Death</h3>
                 <p>Visualize death rate in United States by Cancer.</p>
                 <p>
-                    <a href="#" class="btn btn-default">More Info</a>
+                    <a onclick="dashboard.createTable('cancer death')" class="btn btn-default">More Info</a>
                 </p>
             </div>
         </div>
@@ -74,38 +73,67 @@
                 <h3>Medical Insurance</h3>
                 <p>Visualize insured people.</p>
                 <p>
-                    <a href="#" class="btn btn-default">More Info</a>
+                    <a onclick="dashboard.createTable('medical insurance')" class="btn btn-default">More Info</a>
                 </p>
             </div>
         </div>
     </div>
 </div>
 
-<!--Chart Section-->
-<div id="checkboxes" onclick="selectChart()">
-    <label>Select Charts:</label>
-    <input type="checkbox" id="lineChkBox"> Line Chart </input>
-    <input type="checkbox" id="barChkBox"> Bar Chart </input>
-    <input type="checkbox" id="pieChkBox"> Pie Chart </input>
-    <input type="checkbox" id="doughnutChkBox"> Doughnut Chart </input>
-    <input type="checkbox" id="stackedChkBox"> Stacked Chart </input>
+<div id="datadisplay">
+    <div id="wrapper" style="overflow:hidden;position: relative;">
+        <div id="dataSetHeader" style="padding-top:20px;font-size:25px;"></div>
+        <div id="toAppend" style="display:block;overflow-y:auto;height:400px;"></div>
+    </div>
+
+    <!--Colunm Section-->
+    <div id="columnCheckbox" style="padding-top:40px;"></div>
+
+    <!--Row Section-->
+    <div id="multiselectdropdown" style="padding-top:40px;"></div>
+
+    <!--Aggregate Function-->
+    <div id="aggregateFunction" style="padding-top: 40px;"></div>
+    <div id="aggregateFunctionResult" style="padding-top:20px;"></div>
+
+
+    <div style="padding-top:20px;">
+        <button id="generateChartButton" onclick="dashboard.generateCharts()" style="display:none">Generate Charts</button>
+    </div>
+
+
+    <!--Chart Section-->
+    <div id="checkboxesId" style="padding-top: 2cm;display:none">
+        <label>Select Charts:</label>
+        <input type="checkbox" id="barChkBox" onclick="dashboard.showHideGraph('barChkBox','barChartDiv')" style="margin-left:30px;" checked="true"> Bar Chart </input>
+        <input type="checkbox" id="lineChkBox" onclick="dashboard.showHideGraph('lineChkBox','lineChartDiv')" style="margin-left:30px;" checked="true"> Line Chart </input>
+        <input type="checkbox" id="pieChkBox" onclick="dashboard.showHideGraph('pieChkBox','pieChartDiv')" style="margin-left:30px;" checked="true"> Pie Chart </input>
+        <input type="checkbox" id="doughnutChkBox" onclick="dashboard.showHideGraph('doughnutChkBox','doughnutChartDiv')" style="margin-left:30px;" checked="true"> Doughnut Chart </input>
+        <input type="checkbox" id="stackedChkBox" onclick="dashboard.showHideGraph('stackedChkBox','stackedChartDiv')" style="margin-left:30px;" checked="true"> Stacked Chart </input>
+    </div>
+
+    <div class="row text-center" id="graphDivFirst">
+
+        <div class="col-md-6 col-sm-6 hero-feature" id="lineChartDiv">
+            <canvas id="lineChart" class="canvas-holder half"></canvas>
+        </div>
+
+        <div class="col-md-6 col-sm-6 hero-feature" id="barChartDiv">
+            <canvas id="barChart" class="canvas-holder half"></canvas>
+        </div>
+
+    </div>
+    <div class="row text-center" id="graphDivSec">
+        <div class="col-md-4 col-sm-4 hero-feature" id="pieChartDiv">
+            <canvas id="pieChart" class="canvas-holder half"></canvas>
+        </div>
+        <div class="col-md-4 col-sm-4 hero-feature" id="doughnutChartDiv">
+            <canvas id="doughnutChart" class="canvas-holder half"></canvas>
+        </div>
+        <div class="col-md-4 col-sm-4 hero-feature" id="stackedChartDiv">
+            <canvas id="stackedChart" class="canvas-holder half"></canvas>
+        </div>
+    </div>
+
 </div>
-<div class="row text-center">
-    <div class="col-md-6 col-sm-6 hero-feature" id="lineChartDiv">
-        <canvas id="lineChart"></canvas>
-    </div>
-    <div class="col-md-6 col-sm-6 hero-feature" id="barChartDiv">
-        <canvas id="barChart" class="canvas-holder half"></canvas>
-    </div>
-</div>
-<div class="row text-center">
-    <div class="col-md-4 col-sm-4 hero-feature" id="pieChartDiv">
-        <canvas id="pieChart" class="canvas-holder half"></canvas>
-    </div>
-    <div class="col-md-4 col-sm-4 hero-feature" id="doughnutChartDiv">
-        <canvas id="doughnutChart" class="canvas-holder half"></canvas>
-    </div>
-    <div class="col-md-4 col-sm-4 hero-feature" id="stackedChartDiv">
-        <canvas id="stackedChart" class="canvas-holder half"></canvas>
-    </div>
-</div>
+

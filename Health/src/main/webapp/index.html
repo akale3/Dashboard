@@ -19,17 +19,33 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
+    <script src="js/Chart.js"></script>
+    <script src="js/Chart.bundle.js"></script>
+    <script src="js/dataframe.js"></script>
     <!--Model Imports-->
-    <script src="./app/model/CustomChart.js"></script>
-    <script src="./app/model/Data.js"></script>
-    <script src="./app/model/LineChart.js"></script>
-    <script src="./app/controller/home.js"></script>
+    <script src="./app/model/DatasetObj.js"></script>
+    
+    <!--Controller Imports-->
+    <script src="./app/controller/DataSetFactory.js"></script>
+    <script src="./app/controller/dataframe/DataSet.js"></script>
+    <script src="./app/controller/dataframe/SmokerDataSet.js"></script>
+    <script src="./app/controller/dataframe/BirthDataSet.js"></script>
+    <script src="./app/controller/dataframe/CancerDataSet.js"></script>
+    <script src="./app/controller/dataframe/InsuranceDataSet.js"></script>
+    <script src="./app/controller/dataframe/MortalityDataSet.js"></script>
+    <script src="./app/controller/chart/ChartObserver.js"></script>
+    <script src="./app/controller/chart/BuildChartData.js"></script>
+    <script src="./app/controller/chart/BarChart.js"></script>
+    <script src="./app/controller/chart/DoughnutChart.js"></script>
+    <script src="./app/controller/chart/LineChart.js"></script>
+    <script src="./app/controller/chart/PieChart.js"></script>
+    <script src="./app/controller/chart/StackedChart.js"></script>
+    <script src="./app/controller/dataframe/CancerData.js"></script>
+    <script src="./app/controller/Dashboard.js"></script>
 
 </head>
 
-<body>
+<body onload="scrolltoTop();">
 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -42,19 +58,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Home</a>
+            <a class="navbar-brand" href="./app/views/home.html">Home</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#">About</a>
+                    <a href="./app/views/About.html">About</a>
                 </li>
                 <li>
-                    <a href="#">Services</a>
+                    <a href="./app/views/Services.html">Services</a>
                 </li>
                 <li>
-                    <a href="#">Contact</a>
+                    <a href="./app/views/Contact.html">Contact</a>
                 </li>
             </ul>
         </div>
@@ -66,6 +82,7 @@
 <!-- Page Content -->
 <div class="container">
     <div w3-include-html="./app/views/home.html"></div>
+
     <!-- /.row  ./app/views/home.html -->
     <hr>
     <!-- Footer -->
@@ -77,8 +94,11 @@
         </div>
     </footer>
 </div>
-<script>
-w3IncludeHTML();
+<script type="text/javascript">
+    scrolltoTop = function() {
+            window.scrollTo(0,0);
+        };
+    w3IncludeHTML();
 </script>
 <!-- /.container -->
 </body>
